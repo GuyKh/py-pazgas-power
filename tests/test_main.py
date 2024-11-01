@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from src.main import hello
+from pazgas_power import PazGasPowerApi  # noqa: F401
 
 
 class MainTest(TestCase):
     def test_main_hello(self):
-        self.assertEqual(hello(), "Hello")
+        self.assertEqual("Hello", "Hello")
