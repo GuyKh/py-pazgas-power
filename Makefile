@@ -7,14 +7,8 @@ else
     $(error "Neither docker-compose nor docker compose is available")
 endif
 
-# loading and exporting all env vars from .env file automatically
-ifneq (,$(wildcard ./.env))
-    include .env
-    export
-endif
-
-APP_NAME="python-boilerplate-project"
-IMAGE_NAME="python-boilerplate-project"
+APP_NAME="py-pazgas-power"
+IMAGE_NAME="py-pazgas-power"
 VERSION="latest"
 MAIN_ENTRYPOINT="src/main.py"
 
@@ -23,7 +17,7 @@ MAIN_ENTRYPOINT="src/main.py"
 # COMMANDS TO RUN LOCALLY
 ################################
 
-local/install: generate-default-env-file
+local/install:
 	poetry install
 
 local/tests:
@@ -42,7 +36,7 @@ local/run:
 # COMMANDS TO RUN USING DOCKER (RECOMMENDED)
 ############################################
 
-docker/install: generate-default-env-file
+docker/install:
 	$(DOCKER_COMPOSE) build ${APP_NAME}
 
 docker/up:
@@ -58,10 +52,7 @@ docker/lint:
 	$(DOCKER_COMPOSE) run ${APP_NAME} poetry run ruff check .
 
 docker/lint/fix:
-	$(DOCKER_COMPOSE) run ${APP_NAME} poetry run ruff check . --fix
-
-docker/run:
-	$(DOCKER_COMPOSE) run ${APP_NAME} poetry run python ${MAIN_ENTRYPOINT}
+	$(DOCKER_COMPOSE) run ${APP_NAME} poetry run ruff . --fix
 
 ####################################
 # DOCKER IMAGE COMMANDS
@@ -73,9 +64,3 @@ docker/image/build:
 docker/image/push:
 	docker push ${IMAGE_NAME}:${VERSION}
 
-##################
-# HEPFUL COMMANDS
-##################
-
-generate-default-env-file:
-	@if [ ! -f .env ]; then cp env.template .env; fi;
