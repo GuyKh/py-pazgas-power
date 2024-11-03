@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "py-pazgas-power"
+name = "pazgas-power"
 version = "0.0.1"
 description = "A python wrapper for PazGas Power"
 authors = ["Guy Khmelnitsky <guykhmel@gmail.com>"]
