@@ -4,6 +4,7 @@ version = "0.0.1"
 description = "A python wrapper for PazGas Power"
 authors = ["Guy Khmelnitsky <guykhmel@gmail.com>"]
 license = "MIT"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
