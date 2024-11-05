@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pazgas-power"
-version = "0.0.2"
+version = "0.0.3"
 description = "A python wrapper for PazGas Power"
 authors = ["Guy Khmelnitsky <guykhmel@gmail.com>"]
 license = "MIT"
@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-aiohttp = "^3.10.10"
+aiohttp = "3.10.8"
 aiofiles = "^24.1.0"
 mashumaro = "^3.13.1"
 
