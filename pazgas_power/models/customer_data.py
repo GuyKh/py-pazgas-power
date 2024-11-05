@@ -1,4 +1,5 @@
 """Defines the CustomerData and Invoice data classes."""
+
 import base64
 from dataclasses import dataclass, field
 from datetime import date
@@ -45,10 +46,10 @@ class Invoice(DataClassDictMixin):
             decoded_data = base64.b64decode(self.invoice_file)
 
             # Verify the content is a valid PDF
-            if decoded_data[:5] != b'%PDF-':
+            if decoded_data[:5] != b"%PDF-":
                 raise PazGasPowerError("Invoice Files is not a valid PDF")
 
-            async with aiofiles.open('path', mode='w') as f:
+            async with aiofiles.open("path", mode="w") as f:
                 await f.write(decoded_data)
         except (base64.binascii.Error, UnicodeDecodeError) as e:
             raise PazGasPowerError("field invoice_file isn't a valid base64 encoding") from e
