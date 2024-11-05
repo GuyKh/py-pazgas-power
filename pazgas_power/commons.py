@@ -20,12 +20,12 @@ async def parse_error_response(resp, response_content):
     try:
         json_resp = await resp.json(content_type=None)
         try:
-            err = PazGasErrorResponse.parse_obj(json_resp)
-            raise PazGasPowerError(f"Error PazGas Power API: {err.error} - {err.message}")
+            err = PazGasErrorResponse.from_dict(json_resp)
+            raise PazGasPowerError(f"Error from PazGas Power API: {err.error} - {err.message}")
         except Exception:
-            raise PazGasPowerError(f"Error PazGas Power API: {json_resp}")
+            raise PazGasPowerError(f"Error from PazGas Power API: {json_resp}")
     except Exception as e:
-        raise PazGasPowerError(f"Error PazGas Power API: {resp.status}): {resp.reason} - {e}")
+        raise PazGasPowerError(f"Error from PazGas Power API: {resp.status}): {resp.reason} - {e}")
 
 
 HEADERS = {
@@ -76,6 +76,8 @@ async def send_post_json_request(
     resp = await send_post_request(data, headers, json_data, session, timeout, token, url, use_auth)
 
     json = await resp.json(content_type=None)
+    if json.get("error") or (json.get("status") and json.get("status") != 200):
+        await parse_error_response(resp, json)
 
     _LOGGER.debug(f"{url} responded with data: {json}")
     return json
