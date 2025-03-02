@@ -2,7 +2,8 @@ FROM python:3.11.0-slim-buster AS base
 
 WORKDIR /src
 
-COPY pyproject.toml .
+COPY pyproject.toml README.md .
+COPY pazgas_power ./pazgas_power
 RUN pip install poetry
 
 FROM base AS dependencies
