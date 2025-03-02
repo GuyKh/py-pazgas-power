@@ -5,6 +5,9 @@ description = "A python wrapper for PazGas Power"
 authors = ["Guy Khmelnitsky <guykhmel@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+packages = [
+    { include = "pazgas_power" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -12,7 +15,7 @@ aiohttp = "^3.9.5"
 aiofiles = "^24.1.0"
 mashumaro = "^3.13.1"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
 pytest-cov = "^6.0.0"
 ruff = "^0.8.0"
